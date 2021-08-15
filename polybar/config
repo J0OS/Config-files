@@ -1,0 +1,885 @@
+[bar/i3LVDS1-1]
+
+monitor = LVDS1
+monitor-strict = false
+override-redirect = false
+bottom = false
+fixed-center = true
+width = 100%
+height = 16
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+radius = 0.0
+line-size = 2
+line-color = #000000
+
+padding-left = 1
+padding-right = 1
+
+module-margin-left = 0
+module-margin-right = 0
+
+;https://github.com/jaagr/polybar/wiki/Fonts
+font-0 = "UbuntuMono Nerd Font:size=10;2"
+font-1 = "UbuntuMono Nerd Font:size=16;3"
+font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
+font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
+font-4 = "Font Awesome 5 Brands:pixelsize=8;1"
+font-5 = "Font Awesome 5 Free: style=Solid: pixelsize=11"
+font-6 = "Font Awesome 5 Brands: pixelsize=11"
+font-7 = "Material Icons: style=Regular: pixelsize=13; 2"
+font-8 = "Symbola: style=Regular: pixelsize=8"
+font-9 = "Symbola: style=Regular: pixelsize=16"
+font-10 = "FreeMono: style=Oblique,наклонен,cursiva,kurzíva,kursiv,Πλάγια,Kursivoitu,Italique,Dőlt,Corsivo,Cursief,Kursywa,Itálico,oblic,Курсив,İtalik,huruf miring,похилий,ležeče,slīpraksts,pasvirasis,nghiêng,Etzana,तिरछा: pixelsize=16"
+
+
+modules-left = i3
+modules-center = date
+modules-right = battery networkspeedup networkspeeddown pacman-updates
+
+separator =
+
+tray-position = none
+tray-detached = false
+tray-maxsize = 20
+tray-background = ${colors.background}
+tray-offset-x = 0
+tray-offset-y = 0
+tray-padding = 4
+tray-scale = 1.0
+
+; Enable support for inter-process messaging
+; See the Messaging wiki page for more details.
+enable-ipc = true
+
+; Fallback click handlers that will be called if
+; there's no matching module handler found.
+click-left =
+click-middle =
+click-right =
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+double-click-left =
+double-click-middle =
+double-click-right =
+
+[module/i3]
+;https://github.com/jaagr/polybar/wiki/Module:-i3
+type = internal/i3
+
+; Only show workspaces defined on the same output as the bar
+;
+; Useful if you want to show monitor specific workspaces
+; on different bars
+;
+; Default: false
+pin-workspaces = true
+
+; This will split the workspace name on ':'
+; Default: false
+strip-wsnumbers = false
+
+; Sort the workspaces by index instead of the default
+; sorting that groups the workspaces by output
+; Default: false
+index-sort = false
+
+; Create click handler used to focus workspace
+; Default: true
+enable-click = true
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = true
+
+; Wrap around when reaching the first/last workspace
+; Default: true
+wrapping-scroll = false
+
+; Set the scroll cycle direction
+; Default: true
+reverse-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces
+; containing 'code' in the label
+; Default: false
+fuzzy-match = false
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+ws-icon-default = " "
+
+; Available tags:
+;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+;   <label-mode> (default)
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-foreground = #000000
+label-mode-background = #FFBB00
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+; focused = Active workspace on focused monitor
+label-focused = %icon% %name%
+label-focused-background = ${colors.background}
+label-focused-foreground = ${colors.foreground}
+label-focused-underline = #AD69AF
+label-focused-padding = 2
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon% %name%
+label-unfocused-padding = 2
+label-unfocused-background = ${colors.background}
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-underline =
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon% %name%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = 2
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+; urgent = Workspace with urgency hint set
+label-urgent = %icon% %name%
+label-urgent-background = ${self.label-focused-background}
+label-urgent-foreground = #db104e
+label-urgent-padding = 2
+
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+
+#################################################################
+[module/date]
+type = internal/date
+
+; Seconds to sleep between updates
+; Default: 1.0
+interval = 1.0
+
+; See "https://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+;date = %d-%m-%Y%
+date =    %%{F#99}%m/%d/%Y %%{F-} %%{F#fff}%I:%M:%S %p %%{F-}
+
+
+; Optional time format
+;time = %H:%M:%S
+
+; if `date-alt` or `time-alt` is defined, clicking
+; the module will toggle between formats
+date-alt = %A, %d %B %Y
+time-alt = %H:%M:%S
+
+#################################################################
+[module/battery]
+type = internal/battery
+
+full-at = 98
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT0
+adapter = AC
+time-format = %H:%M:%S
+poll-interval = 5
+
+label-discharging = Discharging %percentage%%
+format-discharging-prefix = "_"
+format-discharging-prefix-foreground = #000000
+format-discharging-suffix = "_"
+format-discharging-suffix-foreground = #000000
+
+label-charging = Charging %percentage%%
+format-charging-prefix = "_"
+format-charging-prefix-foreground = #000000
+format-charging-suffix = "_"
+format-charging-suffix-foreground = #000000
+
+label-full = Full %percentage%%
+format-full-prefix = "_"
+format-full-prefix-foreground = #000000
+format-full-suffix = "_"
+format-full-suffix-foreground = #000000
+
+#################################################################
+[module/networkspeedup]
+;https://github.com/jaagr/polybar/wiki/Module:-network
+type = internal/network
+interface = wlan0
+;interface = enp14s0
+;interface = enp0s31f6
+;interface = enp6s0
+label-connected = "%upspeed:7%"
+format-connected = <label-connected>
+format-connected-prefix = " "
+format-connected-prefix-foreground = #e4d3a1
+format-connected-foreground = #e4d3a1
+format-connected-background = #660000
+format-connected-suffix = " "
+format-connected-suffix-foreground = #e4d3a1
+
+#################################################################
+
+[module/networkspeeddown]
+;https://github.com/jaagr/polybar/wiki/Module:-network
+type = internal/network
+interface = wlan0
+;interface = enp14s0
+;interface = enp0s31f6
+;interface = enp6s0
+label-connected = "%downspeed:7%"
+format-connected = <label-connected>
+format-connected-prefix = "  "
+format-connected-prefix-foreground = #e4d3a1
+format-connected-foreground = #e4d3a1
+format-connected-background = #660000
+format-connected-suffix = " "
+format-connected-suffix-foreground = #e4d3a1
+
+#################################################################
+
+[module/pacman-updates]
+type = custom/script
+;exec = pacman -Qu | wc -l
+exec = checkupdates | wc -l
+interval = 1000
+label = Updates: %output%
+  format-foreground = ${colors.foreground}
+  format-background = ${colors.background}
+  format-prefix = "  "
+  format-prefix-foreground = #FFBB00
+;  format-underline = #FFBB00
+
+#################################################################
+#################################################################
+[bar/i3LVDS1-3]
+
+monitor = LVDS1
+monitor-strict = false
+override-redirect = false
+bottom = false
+fixed-center = true
+width = 100%
+height = 16
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+radius = 0.0
+line-size = 2
+line-color = #000000
+
+padding-left = 1
+padding-right = 1
+
+module-margin-left = 0
+module-margin-right = 0
+
+;https://github.com/jaagr/polybar/wiki/Fonts
+font-0 = "UbuntuMono Nerd Font:size=10;2"
+font-1 = "UbuntuMono Nerd Font:size=16;3"
+font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
+font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
+font-4 = "Font Awesome 5 Brands:pixelsize=8;1"
+font-5 = "Font Awesome 5 Free: style=Solid: pixelsize=11"
+font-6 = "Font Awesome 5 Brands: pixelsize=11"
+font-7 = "Material Icons: style=Regular: pixelsize=13; 2"
+font-8 = "Symbola: style=Regular: pixelsize=8"
+font-9 = "Symbola: style=Regular: pixelsize=16"
+font-10 = "FreeMono: style=Oblique,наклонен,cursiva,kurzíva,kursiv,Πλάγια,Kursivoitu,Italique,Dőlt,Corsivo,Cursief,Kursywa,Itálico,oblic,Курсив,İtalik,huruf miring,похилий,ležeče,slīpraksts,pasvirasis,nghiêng,Etzana,तिरछा: pixelsize=16"
+
+
+modules-left = temperature system-fan-speed cpu
+modules-center =
+modules-right = memory
+
+separator =
+
+tray-position = none
+tray-detached = false
+tray-maxsize = 20
+tray-background = ${colors.background}
+tray-offset-x = 0
+tray-offset-y = 0
+tray-padding = 4
+tray-scale = 1.0
+
+; Enable support for inter-process messaging
+; See the Messaging wiki page for more details.
+enable-ipc = true
+
+; Fallback click handlers that will be called if
+; there's no matching module handler found.
+click-left =
+click-middle =
+click-right =
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+double-click-left =
+double-click-middle =
+double-click-right =
+
+#################################################################
+[module/cpu]
+type = internal/cpu
+
+interval = 0.4
+;format = " <ramp-coreload>"
+format = <label> <ramp-coreload>
+label = %percentage-cores%
+format-margin = 2
+ramp-coreload-0 = ▁
+ramp-coreload-0-foreground = #b2f3b2
+ramp-coreload-1 = ▂
+ramp-coreload-1-foreground = #a1f1a1
+ramp-coreload-2 = ▃
+ramp-coreload-2-foreground = #1bb21b
+ramp-coreload-3 = ▄
+ramp-coreload-3-foreground = #137f13
+ramp-coreload-4 = ▅
+ramp-coreload-4-foreground = #e6e65d
+ramp-coreload-5 = ▆
+ramp-coreload-5-foreground = #e1e13b
+ramp-coreload-6 = ▇
+ramp-coreload-6-foreground = #ee9090
+ramp-coreload-7 = █
+ramp-coreload-7-foreground = #b21b1b
+ramp-coreload-font = 3
+format-background = #660000
+format-foreground = #e4d3a1
+format-padding = 2
+
+#################################################################
+[module/memory]
+type = internal/memory
+interval = 1
+
+format = <label>
+label = %mb_used% %percentage_used%% / %mb_free% %percentage_free%% : %mb_total%
+
+format-prefix = "_"
+format-prefix-foreground = #660000
+format-foreground = #e4d3a1
+format-background = #660000
+format-suffix = "_"
+format-suffix-foreground = #660000
+
+#################################################################
+[module/temperature]
+type = internal/temperature
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 0.4
+
+; Thermal zone to use
+; To list all the zone types, run
+; $ for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
+; Default: 0
+thermal-zone = 0
+
+; Full path of temperature sysfs path
+; Use `sensors` to find preferred temperature source, then run
+; $ for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
+; to find path to desired file
+; Default reverts to thermal zone setting
+hwmon-path = /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon3/temp1_input
+
+; Base temperature for where to start the ramp (in degrees celsius)
+; Default: 0
+base-temperature = 30
+
+; Threshold temperature to display warning label (in degrees celsius)
+; Default: 80
+warn-temperature = 75
+
+label = TEMP %temperature-c%
+label-foreground = #e4d3a1
+format = <label>
+format-prefix = "_"
+format-prefix-foreground = #660000
+; format-foreground = #e4d3a1
+format-background = #660000
+format-suffix = "_"
+format-suffix-foreground = #660000
+
+label-warn = TEMP %temperature-c%
+label-warn-foreground = #d3a1e4
+format-warn = <label-warn>
+format-warn-prefix = "_"
+format-warn-prefix-foreground = #660000
+; format-warn-foreground = #e4d3a1
+format-warn-background = #660000
+format-warn-suffix = "_"
+format-warn-suffix-foreground = #660000
+
+#################################################################
+[module/system-fan-speed]
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/system-fan-speed.sh
+interval = 0.4
+
+#################################################################
+[bar/i3LVDS1-2]
+;https://github.com/jaagr/polybar/wiki/Configuration
+
+monitor = LVDS1
+monitor-fallback = VGA1
+monitor-strict = false
+override-redirect = false
+bottom = true
+fixed-center = true
+width = 100%
+height = 16
+;offset-x = 1%
+;offset-y = 1%
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+; Background gradient (vertical steps)
+;   background-[0-9]+ = #aarrggbb
+;background-0 =
+
+radius = 0.0
+line-size = 2
+line-color = #000000
+
+border-size = 0
+;border-left-size = 25
+;border-right-size = 25
+;border-top-size = 0
+;border-bottom-size = 25
+border-color = #000000
+
+padding-left = 1
+padding-right = 1
+
+module-margin-left = 0
+module-margin-right = 0
+
+;https://github.com/jaagr/polybar/wiki/Fonts
+font-0 = "Source Han Sans JP,源ノ角ゴシック JP,Source Han Sans JP Normal,源ノ角ゴシック JP Normal: style=Normal,Regular: pixelsize=10"
+font-1 = "UbuntuMono Nerd Font:size=16;3"
+font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
+font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
+font-4 = "Font Awesome 5 Brands:pixelsize=8;1"
+font-5 = "Font Awesome 5 Free: style=Solid: pixelsize=11"
+font-6 = "Font Awesome 5 Brands: pixelsize=11"
+font-7 = "Material Icons: style=Regular: pixelsize=13; 2"
+font-8 = "Symbola: style=Regular: pixelsize=8"
+font-9 = "UbuntuMono Nerd Font:size=10;2"
+
+
+modules-left = pulseaudio
+modules-center =
+modules-right = mpd kdeconnect
+
+separator =
+
+;dim-value = 1.0
+
+tray-position = left
+tray-detached = false
+tray-maxsize = 20
+tray-background = ${colors.background}
+tray-offset-x = 0
+tray-offset-y = 0
+tray-padding = 4
+tray-scale = 1.0
+
+
+; Enable support for inter-process messaging
+; See the Messaging wiki page for more details.
+enable-ipc = true
+
+; Fallback click handlers that will be called if
+; there's no matching module handler found.
+click-left =
+click-middle =
+click-right =
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+double-click-left =
+double-click-middle =
+double-click-right =
+
+; Requires polybar to be built with xcursor support (xcb-util-cursor)
+; Possible values are:
+; - default   : The default pointer as before, can also be an empty string (default)
+; - pointer   : Typically in the form of a hand
+; - ns-resize : Up and down arrows, can be used to indicate scrolling
+cursor-click =
+cursor-scroll =
+
+#################################################################
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 2
+label-muted = muted
+
+#################################################################
+
+  [module/mpd]
+;  ;https://github.com/jaagr/polybar/wiki/Module:-mpd
+type = internal/mpd
+
+; Host where mpd is running (either ip or domain name)
+; Can also be the full path to a unix socket where mpd is running.
+host = 127.0.0.1
+port = 6600
+
+; Seconds to sleep between progressbar/song timer sync
+; Default: 1
+interval = 0
+
+;format-offline = <label-offline>
+;<label-offline> = mpd is offline
+
+format-online = <label-song> <icon-prev> <icon-seekb> <icon-play> <icon-pause> <icon-seekf> <icon-next> <bar-progress> <icon-random> <icon-repeat> <icon-single>
+label-song = %artist% - %album% - %title%
+icon-play = ▷
+icon-pause = ⏸
+icon-prev = ⬺
+icon-next = ⤕
+icon-seekb = ⬹
+icon-seekf = ⤔
+bar-progress-width = 20
+; 46
+bar-progress-indicator = ╥
+bar-progress-fill = ┉
+bar-progress-empty = ┉
+icon-random = ⅊
+icon-repeat = ↻
+icon-single = ⎆
+
+##################################################################
+#[module/kdeconnect]
+#type = custom/script
+#exec = "/home/josh/.config/polybar/polybar-kdeconnect.sh -d"
+#tail = true
+
+#################################################################
+#################################################################
+
+[bar/i3VGA1-1]
+;https://github.com/jaagr/polybar/wiki/Configuration
+
+monitor = VGA1
+;monitor-fallback = HDMI1
+monitor-strict = false
+override-redirect = false
+bottom = false
+fixed-center = true
+width = 100%
+height = 20
+;offset-x = 1%
+;offset-y = 1%
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+; Background gradient (vertical steps)
+;   background-[0-9]+ = #aarrggbb
+;background-0 =
+
+radius = 0.0
+line-size = 2
+line-color = #000000
+
+border-size = 0
+;border-left-size = 25
+;border-right-size = 25
+;border-top-size = 0
+;border-bottom-size = 25
+border-color = #000000
+
+padding-left = 1
+padding-right = 1
+
+module-margin-left = 0
+module-margin-right = 0
+
+;https://github.com/jaagr/polybar/wiki/Fonts
+font-0 = "UbuntuMono Nerd Font:size=10;2"
+font-1 = "UbuntuMono Nerd Font:size=16;3"
+font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
+font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
+font-4 = "Font Awesome 5 Brands:pixelsize=8;1"
+font-5 = "Font Awesome 5 Free: style=Solid: pixelsize=11"
+font-6 = "Font Awesome 5 Brands: pixelsize=11"
+font-7 = "Material Icons: style=Regular: pixelsize=13; 2"
+font-8 = "Symbola: style=Regular: pixelsize=8"
+font-9 = "Symbola: style=Regular: pixelsize=16"
+
+modules-left = i3-2
+modules-center = date-2
+modules-right =  networkspeedup-2 networkspeeddown-2  pavolume-2
+
+separator =
+
+;dim-value = 1.0
+
+tray-position = none
+tray-detached = false
+tray-maxsize = 20
+tray-background = ${colors.background}
+tray-offset-x = 0
+tray-offset-y = 0
+tray-padding = 4
+tray-scale = 1.0
+
+#i3: Make the bar appear below windows
+;wm-restack = i3
+;override-redirect = true
+
+; Enable support for inter-process messaging
+; See the Messaging wiki page for more details.
+enable-ipc = true
+
+; Fallback click handlers that will be called if
+; there's no matching module handler found.
+click-left =
+click-middle =
+click-right =
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+double-click-left =
+double-click-middle =
+double-click-right =
+
+; Requires polybar to be built with xcursor support (xcb-util-cursor)
+; Possible values are:
+; - default   : The default pointer as before, can also be an empty string (default)
+; - pointer   : Typically in the form of a hand
+; - ns-resize : Up and down arrows, can be used to indicate scrolling
+cursor-click =
+cursor-scroll =
+
+#################################################################
+
+[module/i3-2]
+;https://github.com/jaagr/polybar/wiki/Module:-i3
+type = internal/i3
+
+; Only show workspaces defined on the same output as the bar
+;
+; Useful if you want to show monitor specific workspaces
+; on different bars
+;
+; Default: false
+pin-workspaces = true
+
+; This will split the workspace name on ':'
+; Default: false
+strip-wsnumbers = false
+
+; Sort the workspaces by index instead of the default
+; sorting that groups the workspaces by output
+; Default: false
+index-sort = false
+
+; Create click handler used to focus workspace
+; Default: true
+enable-click = true
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = true
+
+; Wrap around when reaching the first/last workspace
+; Default: true
+wrapping-scroll = false
+
+; Set the scroll cycle direction
+; Default: true
+reverse-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces
+; containing 'code' in the label
+; Default: false
+fuzzy-match = false
+
+;extra icons to choose from
+;http://fontawesome.io/cheatsheet/
+;       v     
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+ws-icon-default = " "
+
+; Available tags:
+;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+;   <label-mode> (default)
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-foreground = #000000
+label-mode-background = #FFBB00
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+; focused = Active workspace on focused monitor
+label-focused = %icon% %name%
+label-focused-background = ${colors.background}
+label-focused-foreground = ${colors.foreground}
+label-focused-underline = #AD69AF
+label-focused-padding = 2
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon% %name%
+label-unfocused-padding = 2
+label-unfocused-background = ${colors.background}
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-underline =
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon% %name%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = 2
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+; urgent = Workspace with urgency hint set
+label-urgent = %icon% %name%
+label-urgent-background = ${self.label-focused-background}
+label-urgent-foreground = #db104e
+label-urgent-padding = 2
+
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+
+#################################################################
+
+[module/date-2]
+type = internal/date
+
+; Seconds to sleep between updates
+; Default: 1.0
+interval = 1.0
+
+; See "https://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+;date = %d-%m-%Y%
+date =    %%{F#99}%m/%d/%Y %%{F-} %%{F#fff}%I:%M:%S %p %%{F-}
+
+
+; Optional time format
+;time = %H:%M:%S
+
+; if `date-alt` or `time-alt` is defined, clicking
+; the module will toggle between formats
+date-alt = %A, %d %B %Y
+time-alt = %H:%M:%S
+
+#################################################################
+
+[module/networkspeedup-2]
+;https://github.com/jaagr/polybar/wiki/Module:-network
+type = internal/network
+interface = wlp3s0
+;interface = enp14s0
+;interface = enp0s31f6
+;interface = enp6s0
+label-connected = "%upspeed:7%"
+format-connected = <label-connected>
+format-connected-prefix = " "
+format-connected-prefix-foreground = #e4d3a1
+format-connected-foreground = #e4d3a1
+format-connected-background = #660000
+
+#################################################################
+
+[module/networkspeeddown-2]
+;https://github.com/jaagr/polybar/wiki/Module:-network
+type = internal/network
+interface = wlp3s0
+;interface = enp14s0
+;interface = enp0s31f6
+;interface = enp6s0
+label-connected = "%downspeed:7%"
+format-connected = <label-connected>
+format-connected-prefix = "  "
+format-connected-prefix-foreground = #e4d3a1
+format-connected-foreground = #e4d3a1
+format-connected-background = #8d62ad
+
+#################################################################
+#
+#[module/pacman-updates-2]
+#type = custom/script
+#exec = pacman -Qu | wc -l
+#exec = checkupdates | wc -l
+#interval = 1000
+#label = Repo: %output%
+#format-foreground = ${colors.foreground}
+#format-background = ${colors.background}
+#format-prefix = "  "
+#format-prefix-foreground = #FFBB00
+#format-underline = #FFBB00
+#
+#################################################################
