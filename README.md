@@ -3,9 +3,4 @@ This are my configuration files for various programs, that, naturally, I use.
 
 -----------------------------------------------------------------------------
 
-Files for .config:
-
------------------------------------------------------------------------------
-
-Files for home directory:
-.ncmpcpp
+All of these may need a . in front to function :)
