@@ -1,0 +1,21 @@
+﻿
+source ~/.config/neomutt/settings
+source ~/.config/neomutt/colours
+source ~/.config/neomutt/mappings
+
+# Accounts
+
+source ~/.config/neomutt/accounts/gmail
+folder-hook $folder 'source ~/.config/neomutt/accounts/gmail'
+
+source ~/.config/neomutt/accounts/school
+folder-hook $folder 'source ~/.config/neomutt/accounts/school'
+
+#source ~/.config/neomutt/accounts/personal
+#folder-hook $folder 'source ~/.config/neomutt/accounts/personal'
+
+
+#source ~/.config/neomutt/accounts/main
+#folder-hook $folder 'source ~/.config/neomutt/accounts/main'
+alias Name <Email@Email>
+alias Name <Email@Email>

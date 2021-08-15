@@ -1,0 +1,16 @@
+# MS Word documents
+application/msword; libreoffice %s
+application/vnd.ms-excel; libreoffice %s 
+application/vnd.openxmlformats-officedocument.presentationml.presentation; libreoffice %s 
+application/vnd.oasis.opendocument.text; libreoffice %s 
+
+# HTML
+text/html; surf %s
+text/plain; nano %s
+
+#PDFs
+application/pdf; okular %s 
+
+#Images
+image/png; feh %s
+image/jpeg; feh %s
